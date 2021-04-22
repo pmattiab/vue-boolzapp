@@ -23,7 +23,7 @@
                 <!-- inizio colonna sinistra -->
                 <div class="left_col">
                     <div class="myuser bglightgray flex align_center padding_10_15">
-                        <div class="myuser_img chat_user_img">
+                        <div class="myuser_img">
                             <img :src="'img/avatar' + myContact.avatar + '.jpg'" alt="" class="circle_img">
                         </div>
                         <span class="myuser_name">{{myContact.name}}</span>
@@ -43,26 +43,34 @@
                         </div>
                     </div>
                     <div class="contacts">
-                        <div class="contacts_filter bglightgray flex align_center padding_10_15">
-                            <!-- <span><i class="fas fa-search"></i></span> -->
+                        <div class="text_input contacts_filter bglightgray flex align_center padding_10_15 pos_relative">
                             <input
                             type="text"
-                            class="text_input filter_input"
+                            class="filter_input"
                             placeholder="Cerca o inizia una nuova chat"
                             v-model="userFilter"
                             @keyup="contactFilter">
+                            <span class="search_icon"><i class="fas fa-search"></i></span>
                         </div>
                         <div class="contacts_cont">
                             <ul class="contacts_list">
                                 <li v-for="(contact, index) in contacts"
                                 v-if="contact.visible"
                                 @click="changeChat(contact, index)"
-                                class="single_chat pointer flex padding_10_15">
+                                class="single_chat pointer flex align_center padding_10_15"
+                                :class="{'toread': contact.toRead}">
 
                                     <div class="chat_user_img">
                                         <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="" class="circle_img">
                                     </div>
-                                    <div class="chat_user_name">{{contact.name}}</div>
+                                    <div class="contact_details flex">
+                                        <div class="chat_contact_name">{{contact.name}}</div>
+                                        <div
+                                        class="chat_last_msg">{{contact.messages[lastMsgIndex(contact)].text}}</div>
+                                    </div>
+                                    <div v-if="contact.toRead" class="toread_circle">
+                                        <i class="fas fa-circle"></i>
+                                    </div>
 
                                 </li>
                             </ul>
@@ -97,20 +105,23 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="chat_input flex align_center padding_20_30">
+
+                    <div class="chat_input flex align_center pos_relative">
                         <span><i class="far fa-smile"></i></span>
                         <div class="text_input">
-                            <input type="text"
-                            @keyup.enter="sendMsg(currentChat)"
+
+                            <input
+                            type="text"
+                            class="message_input"
+                            placeholder="Scrivi un messaggio"
                             v-model="newUserMsg"
-                            class="text_input message_input"
-                            placeholder="Scrivi un messaggio">
+                            @keyup.enter="sendMsg(currentChat)">
+                            
+                            <span class="send_btn circle_img pointer flex align_center" @click="sendMsg(currentChat)">
+                                <i class="fas fa-paper-plane"></i>
+                            </span>
+
                         </div>
-                        <span
-                        class="send_btn circle_img pointer flex align_center"
-                        @click="sendMsg(currentChat)">
-                            <i class="fas fa-paper-plane"></i>
-                        </span>
                         <span><i class="fas fa-microphone"></i></span>
                     </div>
                 </div>

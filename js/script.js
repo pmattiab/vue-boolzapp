@@ -23,6 +23,7 @@ var app = new Vue(
                     name: 'Michele',
                     avatar: '_1',
                     visible: true,
+                    toRead: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -45,6 +46,7 @@ var app = new Vue(
                     name: 'Fabio',
                     avatar: '_2',
                     visible: true,
+                    toRead: true,
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -67,6 +69,7 @@ var app = new Vue(
                     name: 'Samuele',
                     avatar: '_3',
                     visible: true,
+                    toRead: false,
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -89,6 +92,7 @@ var app = new Vue(
                     name: 'Luisa',
                     avatar: '_4',
                     visible: true,
+                    toRead: true,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -106,6 +110,7 @@ var app = new Vue(
                     name: 'Luca',
                     avatar: '_5',
                     visible: true,
+                    toRead: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -128,6 +133,7 @@ var app = new Vue(
                     name: 'Roberta',
                     avatar: '_6',
                     visible: true,
+                    toRead: false,
                     messages: [
                         {
                             date: '20/03/2020 16:30:00',
@@ -150,6 +156,7 @@ var app = new Vue(
                     name: 'Antonio',
                     avatar: '_7',
                     visible: true,
+                    toRead: false,
                     messages: [
                         {
                             date: '28/03/2020 10:10:40',
@@ -172,6 +179,7 @@ var app = new Vue(
                     name: 'Pasquale',
                     avatar: '_8',
                     visible: true,
+                    toRead: false,
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
@@ -215,6 +223,9 @@ var app = new Vue(
 
             changeChat(contact, index) {
                 this.currentChat = index;
+                console.log(contact);
+                contact.toRead = false;
+                
             },
 
             sendMsg(currentChat) {
@@ -236,6 +247,11 @@ var app = new Vue(
                     alert("Messaggio vuoto");
 
                 }
+            },
+
+            lastMsgIndex(contact) {
+                let indexNumber = contact.messages.length;
+                return indexNumber - 1;
             }
         },
 
