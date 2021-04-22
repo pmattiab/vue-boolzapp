@@ -18,31 +18,76 @@
         <div id="root">
 
             <!-- inizio app containter -->
-            <div class="app_container">
+            <div class="app_container flex">
 
                 <!-- inizio colonna sinistra -->
                 <div class="left_col">
                     <div class="myuser bglightgray flex">
-                        <div class="myuser_img">img</div>
-                        <span class="myuser_name">name surname</span>
+                        <div class="myuser_img chat_user_img">
+                            <img :src="'img/avatar' + myContact.avatar + '.jpg'" alt="">
+                        </div>
+                        <span class="myuser_name">{{myContact.name}}</span>
                         <div class="icons">
-                            <span class="icon"><i class="fas fa-circle-notch"></i></span>
-                            <span class="icon"><i class="fas fa-comment-alt"></i></span>
-                            <span class="icon"><i class="fas fa-ellipsis-v"></i></span>
+                            <span class="icon pointer"><i class="fas fa-circle-notch"></i></span>
+                            <span class="icon pointer"><i class="fas fa-comment-alt"></i></span>
+                            <span class="icon pointer"><i class="fas fa-ellipsis-v"></i></span>
                         </div>
                     </div>
-                    <div class="notify">notify</div>
-                    <div class="chats">
-                        <div class="chat_filter bglightgray">filtro chat</div>
-                    chats</div>
+                    <div class="notify flex">
+                        <div>
+                            <span class="pointer"><i class="fas fa-bell-slash"></i></span>
+                        </div>
+                        <div>
+                            <div>Ricevi notifiche di nuovi messaggi</div>
+                            <div><a href="#">Attiva notifiche desktop</a></div>
+                        </div>
+                    </div>
+                    <div class="contacts">
+                        <div class="contacts_filter bglightgray flex">
+                            <span><i class="fas fa-search"></i></span>
+                            <input type="text" class="filter_input" placeholder="Cerca o inizia una nuova chat">
+                        </div>
+                        <div class="contacts_cont">
+                            <ul class="contacts_list">
+                                <li v-for="(contact, index) in contacts" @click="changeChat(contact, index)" class="single_chat pointer flex">
+
+                                    <div class="chat_user_img">
+                                        <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                                    </div>
+                                    <div class="chat_user_name">{{contact.name}}</div>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <!-- fine colonna sinistra -->
                 
                 <!-- inizio colonna destra -->
                 <div class="right_col">
-                    <div class="chat_user bglightgray">chat user</div>
-                    <div class="chat_text">chat text</div>
-                    <div class="chat_input">message input</div>
+                    <div class="chat_user bglightgray flex">
+                        <div class="chat_user_img">
+                            <img :src="'img/avatar' + contacts[currentChat].avatar + '.jpg'" alt="">
+                        </div>
+                        <div class="chat_user_name">{{contacts[currentChat].name}}</div>
+                        <div class="icons">
+                            <span class="icon pointer"><i class="fas fa-search"></i></i></span>
+                            <span class="icon pointer"><i class="fas fa-paperclip"></i></i></span>
+                            <span class="icon pointer"><i class="fas fa-ellipsis-v"></i></span>
+                        </div>
+                    </div>
+                    <div class="chat_text">
+                        <ul>
+                            <li v-for="(message, index) in (contacts[currentChat].messages)">{{message.text}}</li>
+                        </ul>
+                    </div>
+                    <div class="chat_input flex">
+                        <span><i class="far fa-smile"></i></span>
+                        <div class="text_input">
+                            <input type="text" class="message_input" placeholder="Scrivi un messaggio">
+                        </div>
+                        <span><i class="fas fa-microphone"></i></span>
+                    </div>
                 </div>
                 <!-- fine colonna destra -->
 
