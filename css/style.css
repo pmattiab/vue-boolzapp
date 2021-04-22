@@ -1,0 +1,108 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* COMMON */
+body {
+    height: 100vh;
+    width: 100%;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-color: #029588;
+    background-image: linear-gradient(180deg, #029588 20%, #d2dbdb 20%);
+    position: relative;
+}
+
+.flex {
+    display: flex;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.bglightgray {
+    background-color: #e9e9e9;
+}
+
+/* WRAPPER */
+.wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    height: 90%;
+    width: 80%;
+}
+
+/* app root */
+#root {
+    height: 100%;
+}
+
+/* app container */
+.app_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.left_col {
+    width: 400px;
+    height: 100%;
+}
+
+.right_col {
+    width: calc(100% - 400px);
+    height: 100%;
+}
+
+/* colonna sinistra */
+.myuser {
+    height: 90px;
+    border-right: 2px solid lightgray;
+}
+
+.myuser_img {
+    margin-right: 10px;
+}
+
+.myuser_name {
+    flex-grow: 1;
+}
+
+.icons .icon {
+    margin-left: 10px;
+}
+
+.notify {
+    height: 110px;
+    background-color: #8edafc;
+}
+
+.chats {
+    height: calc(100% - 200px);
+    background-color: white;
+}
+
+.chat_filter {
+    height: 60px;
+}
+
+/* colonna destra */
+.chat_user {
+    height: 90px;
+}
+
+.chat_text {
+    height: calc(100% - 180px);
+    background-image: url(../img/mine.jpg)
+}
+
+.chat_input {
+    height: 90px;
+    background-color: #f3eee9;
+}
