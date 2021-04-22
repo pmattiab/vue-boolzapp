@@ -12,6 +12,8 @@ var app = new Vue(
                 avatar: '_io',
             },
 
+            userFilter: "",
+
             newUserMsg: "",
 
             currentChat: 0,
@@ -190,6 +192,26 @@ var app = new Vue(
 
         // methods (funzioni)
         methods: {
+
+            contactFilter () {
+
+                this.contacts.forEach((element) => {
+
+                    const contactName = element.name.toLowerCase();
+
+                    if (contactName.includes(this.userFilter.toLowerCase())) {
+
+                        element.visible = true;
+
+                    } else {
+
+                        element.visible = false;
+
+                    }
+
+                });
+
+            },
 
             changeChat(contact, index) {
                 this.currentChat = index;

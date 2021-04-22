@@ -20,6 +20,10 @@ img {
     height: 100%;
 }
 
+.circle_img {
+    border-radius: 50%;
+}
+
 .flex {
     display: flex;
 }
@@ -28,8 +32,20 @@ img {
     align-items: center;
 }
 
+.padding_10_15 {
+    padding: 10px 15px;
+}
+
+.padding_20_30 {
+    padding: 20px 30px;
+}
+
 .pointer {
     cursor: pointer;
+}
+
+i {
+    font-size: 22px;
 }
 
 .bglightgray {
@@ -75,8 +91,9 @@ img {
     border-right: 2px solid lightgray;
 }
 
-.myuser_img {
-    margin-right: 10px;
+.myuser_,
+.chat_user_img {
+    margin-right: 15px;
 }
 
 .myuser_name {
@@ -85,6 +102,7 @@ img {
 
 .icons .icon {
     margin-left: 10px;
+    color: gray;
 }
 
 .notify {
@@ -92,17 +110,35 @@ img {
     background-color: #8edafc;
 }
 
+.notify .icon {
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    color: #8edafc;
+    background-color: white;
+    margin-right: 15px;
+}
+
+.desktop_notify {
+    font-size: small;
+    color: gray;
+}
+
 .contacts {
     height: calc(100% - 180px);
+    width: 100%;
     background-color: white;
 }
 
 .contacts_filter {
+    width: 100%;
     height: 60px;
 }
 
-.filter_input {
-    width: 100%;
+.text_input {
+    flex-grow: 1;
+    padding: 0 20px;
+    height: 100%;
 }
 
 .contacts_cont {
@@ -113,11 +149,15 @@ img {
 .single_chat {
     height: 90px;
     list-style-type: none;
-    border-bottom: 2px solid lightgray;
+    border-bottom: 1px solid lightgray;
 }
 
 .single_chat:last-child {
     border-bottom: 0;
+}
+
+.single_chat:hover {
+    background-color: #e9e9e9;
 }
 
 .chat_user_img {
@@ -133,6 +173,13 @@ img {
     flex-grow: 1;
 }
 
+.last_login {
+    color: gray;
+    font-style: italic;
+    font-size: small;
+    margin-top: 5px;
+}
+
 .chat_text {
     height: calc(100% - 180px);
     background-image: url(../img/mine.jpg)
@@ -144,7 +191,6 @@ img {
 
 .single_message {
     width: max-content;
-    padding: 10px 20px;
     border-radius: 10px;
     margin: 5px 0;
     background-color: white;
@@ -170,8 +216,18 @@ img {
     background-color: #f3eee9;
 }
 
-.text_input {
-    flex-grow: 1;
+.send_btn {
+    color: white;
+    height: 40px;
+    width: 40px;
+    background-color: seagreen;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.send_btn .fas {
+    font-size: 18px;
+    transform: translateX(-1.5px);
 }
 
 .message_input {
