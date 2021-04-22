@@ -199,16 +199,22 @@ var app = new Vue(
 
                 const arrayMsgs = this.contacts[currentChat].messages;
 
-                arrayMsgs.push({
-                    date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
-                    text: this.newUserMsg,
-                    status: 'sent'
-                });
-                
-                this.newUserMsg = "";
+                if (this.newUserMsg.length > 0) {
 
+                    arrayMsgs.push({
+                        date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+                        text: this.newUserMsg,
+                        status: 'sent'
+                    });
+
+                    this.newUserMsg = "";
+
+                } else {
+
+                    alert("Messaggio vuoto");
+
+                }
             }
-
         },
 
         // funzioni da far partire al caricamento della pagina
