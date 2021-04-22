@@ -12,6 +12,8 @@ var app = new Vue(
                 avatar: '_io',
             },
 
+            newUserMsg: "",
+
             currentChat: 0,
 
             contacts: [
@@ -191,6 +193,20 @@ var app = new Vue(
 
             changeChat(contact, index) {
                 this.currentChat = index;
+            },
+
+            sendMsg(currentChat) {
+
+                const arrayMsgs = this.contacts[currentChat].messages;
+
+                arrayMsgs.push({
+                    date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+                    text: this.newUserMsg,
+                    status: 'sent'
+                });
+                
+                this.newUserMsg = "";
+
             }
 
         },

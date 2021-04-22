@@ -18,11 +18,11 @@
         <div id="root">
 
             <!-- inizio app containter -->
-            <div class="app_container flex">
+            <div class="app_container flex align_center">
 
                 <!-- inizio colonna sinistra -->
                 <div class="left_col">
-                    <div class="myuser bglightgray flex">
+                    <div class="myuser bglightgray flex align_center">
                         <div class="myuser_img chat_user_img">
                             <img :src="'img/avatar' + myContact.avatar + '.jpg'" alt="">
                         </div>
@@ -33,7 +33,7 @@
                             <span class="icon pointer"><i class="fas fa-ellipsis-v"></i></span>
                         </div>
                     </div>
-                    <div class="notify flex">
+                    <div class="notify flex align_center">
                         <div>
                             <span class="pointer"><i class="fas fa-bell-slash"></i></span>
                         </div>
@@ -43,9 +43,12 @@
                         </div>
                     </div>
                     <div class="contacts">
-                        <div class="contacts_filter bglightgray flex">
+                        <div class="contacts_filter bglightgray flex align_center">
                             <span><i class="fas fa-search"></i></span>
-                            <input type="text" class="filter_input" placeholder="Cerca o inizia una nuova chat">
+                            <input
+                            type="text"
+                            class="filter_input"
+                            placeholder="Cerca o inizia una nuova chat">
                         </div>
                         <div class="contacts_cont">
                             <ul class="contacts_list">
@@ -65,7 +68,7 @@
                 
                 <!-- inizio colonna destra -->
                 <div class="right_col">
-                    <div class="chat_user bglightgray flex">
+                    <div class="chat_user bglightgray flex align_center">
                         <div class="chat_user_img">
                             <img :src="'img/avatar' + contacts[currentChat].avatar + '.jpg'" alt="">
                         </div>
@@ -77,14 +80,23 @@
                         </div>
                     </div>
                     <div class="chat_text">
-                        <ul>
-                            <li v-for="(message, index) in (contacts[currentChat].messages)">{{message.text}}</li>
+                        <ul class="message_list flex">
+                            <li v-for="message in (contacts[currentChat].messages)"
+                            class="single_message flex"
+                            :class="{'sent': message.status == 'sent'}">
+                                <div class="msg_text">{{message.text}}</div>
+                                <div class="msg_date">{{message.date}}</div>
+                            </li>
                         </ul>
                     </div>
-                    <div class="chat_input flex">
+                    <div class="chat_input flex align_center">
                         <span><i class="far fa-smile"></i></span>
                         <div class="text_input">
-                            <input type="text" class="message_input" placeholder="Scrivi un messaggio">
+                            <input type="text"
+                            @keyup.enter="sendMsg(currentChat)"
+                            v-model="newUserMsg"
+                            class="message_input"
+                            placeholder="Scrivi un messaggio">
                         </div>
                         <span><i class="fas fa-microphone"></i></span>
                     </div>

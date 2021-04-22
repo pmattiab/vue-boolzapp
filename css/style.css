@@ -22,6 +22,9 @@ img {
 
 .flex {
     display: flex;
+}
+
+.align_center {
     align-items: center;
 }
 
@@ -133,6 +136,33 @@ img {
 .chat_text {
     height: calc(100% - 180px);
     background-image: url(../img/mine.jpg)
+}
+
+.message_list {
+    flex-direction: column;
+}
+
+.single_message {
+    width: max-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 5px 0;
+    background-color: white;
+    list-style-type: none;
+    flex-direction: column;
+}
+
+.single_message.sent {
+    align-self: flex-end;
+    background-color: #d5f9ba;
+}
+
+.msg_date {
+    color: gray;
+    font-style: italic;
+    font-size: x-small;
+    margin-top: 5px;
+    align-self: flex-end;
 }
 
 .chat_input {
