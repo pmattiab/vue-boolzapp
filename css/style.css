@@ -172,6 +172,7 @@ input {
     height: 90px;
     list-style-type: none;
     border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+    position: relative;
 }
 
 .single_chat:last-child {
@@ -188,17 +189,38 @@ input {
     box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
 }
 
+.contact_details {
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .chat_last_msg {
     color: gray;
     font-size: small;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chat_last_login {
+    opacity: 0.4;
+    font-size: x-small;
+    font-style: italic;
+    position: absolute;
+    top: 15px;
+    right: 15px;
 }
 
 .toread {
     color: #029588;
     font-style: italic;
     font-weight: bold;
+}
+
+.toread .chat_last_msg {
+    max-width: 250px;
 }
 
 .toread_circle i {
@@ -217,12 +239,6 @@ input {
 
 .chat_contact_name {
     margin-bottom: 5px;
-}
-
-.contact_details {
-    flex-grow: 1;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .last_login {
@@ -275,6 +291,23 @@ input {
     position: absolute;
     bottom: 5px;
     right: 5px;
+}
+
+.msg_icon_dd {
+    color: gray;
+    position: absolute;
+    top: 25%;
+    right: 5%;
+    display: none;
+}
+
+.received .msg_icon_dd {
+    top: 25%;
+    right: 10%;
+}
+
+.single_message:hover .msg_icon_dd {
+    display: block;
 }
 
 .chat_input {

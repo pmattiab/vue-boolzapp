@@ -250,7 +250,7 @@ var app = new Vue(
                         arrayMsgs.push({
 
                             date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
-                            text: 'ok',
+                            text: 'Ok',
                             status: 'received'
 
                         });
@@ -269,6 +269,10 @@ var app = new Vue(
                 let indexNumber = contact.messages.length;
 
                 return indexNumber - 1;
+            },
+
+            dropDownShow() {
+                alert("test");
             }
         },
 

@@ -111,6 +111,11 @@
                                         <div class="chat_last_msg">
                                             <span>{{contact.messages[lastMsgIndex(contact)].text}}</span>
                                         </div>
+
+                                        <!-- ultimo accesso contatto -->
+                                        <div class="chat_last_login" v-if="!contact.toRead">
+                                            <span>{{contact.messages[lastMsgIndex(contact)].date}}</span>
+                                        </div>
                                     
                                     </div>
                                     <!-- fine dettagli contatto -->
@@ -146,11 +151,15 @@
                             <img :src="'img/avatar' + contacts[currentChat].avatar + '.jpg'" alt="" class="circle_img">
                         </div>
 
-                        <!-- nome contatto -->
+                        <!-- info contatto chat attiva -->
                         <div class="chat_user_name">
+
+                            <!-- nome contatto -->
                             <div>{{contacts[currentChat].name}}</div>
+
+                            <!-- ultimo accesso -->
                             <div>
-                                <span class="last_login">Ultimo accesso oggi alle</span>
+                                <span class="last_login">Ultimo accesso {{contacts[currentChat].messages[0].date}}</span>
                             </div>
                         </div>
 
@@ -166,14 +175,34 @@
 
                     <!-- inizio sezione messaggi chat attiva -->
                     <div class="chat_text padding_20_30">
+
+                        <!-- inizio lista messaggi stampata con v-for -->
                         <ul class="message_list flex">
+
+                            <!-- inizio singolo messaggio -->
                             <li v-for="message in (contacts[currentChat].messages)"
                             class="single_message padding_10_15"
                             :class="message.status">
+
+                                <!-- testo messaggio -->
                                 <div class="msg_text">{{message.text}}</div>
+
+                                <!-- data messaggio -->
                                 <div class="msg_date">{{message.date}}</div>
+
+                                <!-- icona per menu dropdown -->
+                                <div
+                                class="msg_icon_dd pointer"
+                                @click="dropDownShow()">
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+
                             </li>
+                            <!-- fine singolo messaggio -->
+
                         </ul>
+                        <!-- fine lista messaggi stampata con v-for -->
+
                     </div>
                     <!-- fine sezione messaggi chat attiva -->
 
