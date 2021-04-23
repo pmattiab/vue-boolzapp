@@ -222,8 +222,9 @@ var app = new Vue(
             },
 
             changeChat(contact, index) {
+
                 this.currentChat = index;
-                console.log(contact);
+                                
                 contact.toRead = false;
                 
             },
@@ -235,12 +236,26 @@ var app = new Vue(
                 if (this.newUserMsg.length > 0) {
 
                     arrayMsgs.push({
+
                         date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
                         text: this.newUserMsg,
                         status: 'sent'
+                        
                     });
 
                     this.newUserMsg = "";
+
+                    setTimeout(() => {
+
+                        arrayMsgs.push({
+
+                            date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+                            text: 'ok',
+                            status: 'received'
+
+                        });
+
+                      }, 2000);
 
                 } else {
 
@@ -250,7 +265,9 @@ var app = new Vue(
             },
 
             lastMsgIndex(contact) {
+
                 let indexNumber = contact.messages.length;
+
                 return indexNumber - 1;
             }
         },

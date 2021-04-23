@@ -31,10 +31,6 @@ img {
     align-items: center;
 }
 
-.pos_relative {
-    position: relative;
-}
-
 .padding_10_15 {
     padding: 10px 15px;
 }
@@ -47,10 +43,6 @@ img {
     cursor: pointer;
 }
 
-i {
-    font-size: 22px;
-}
-
 input {
     outline: none;
 }
@@ -61,13 +53,12 @@ input {
 
 /* WRAPPER */
 .wrapper {
+    height: 90%;
+    width: 80%;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    margin: auto;
-    height: 90%;
-    width: 80%;
 }
 
 /* app root */
@@ -80,19 +71,16 @@ input {
     width: 100%;
     height: 100%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    display: flex;
 }
 
 .left_col {
     width: 400px;
     height: 100%;
-    flex-shrink: 2;
 }
 
 .right_col {
     flex-grow: 1;
     height: 100%;
-    flex-shrink: 3;
 }
 
 /* colonna sinistra */
@@ -112,6 +100,7 @@ input {
 }
 
 .icons .icon {
+    font-size: 22px;
     margin-left: 15px;
     color: gray;
 }
@@ -122,6 +111,7 @@ input {
 }
 
 .notify .icon {
+    font-size: 20px;
     justify-content: center;
     width: 50px;
     height: 50px;
@@ -152,19 +142,25 @@ input {
 
 .filter_input {
     font-size: 15px;
-    padding: 0 20px 0 40px;
     width: 100%;
     height: 40px;
-    border: 1px solid #d2dbdb;
+    border-top: 1px solid #d2dbdb;
+    border-right: 1px solid #d2dbdb;
+    border-bottom: 1px solid #d2dbdb;
+    border-left: 0;
+    padding-left: 10px;
 }
 
-.search_icon i {
+.search_icon {
     font-size: 18px;
-    color: #e9e9e9;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 7%;
+    color: #d2dbdb;
+    height: 40px;
+    background-color: white;
+    border-top: 1px solid #d2dbdb;
+    border-right: 0;
+    border-bottom: 1px solid #d2dbdb;
+    border-left: 1px solid #d2dbdb;
+    padding-left: 10px;
 }
 
 .contacts_cont {
@@ -182,6 +178,11 @@ input {
     border-bottom: 0;
 }
 
+.single_chat.active {
+    background-color: #f1f0f0;
+    box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
 .single_chat:hover {
     background-color: #f1f0f0;
     box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.3);
@@ -190,6 +191,8 @@ input {
 .chat_last_msg {
     color: gray;
     font-size: small;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .toread {
@@ -199,6 +202,7 @@ input {
 }
 
 .toread_circle i {
+    margin-left: 5px;
     color: #029588;
 }
 
@@ -239,13 +243,14 @@ input {
 }
 
 .single_message {
-    width: max-content;
-    max-width: 45%;
+    min-width: 110px;
+    max-width: 60%;
+    word-break: break-all;
     border-radius: 10px;
     margin: 5px 0;
-    background-color: white;
+    padding-bottom: 25px;
     list-style-type: none;
-    flex-direction: column;
+    position: relative;
 }
 
 .single_message.sent {
@@ -253,18 +258,30 @@ input {
     background-color: #d5f9ba;
 }
 
+.single_message.received {
+    align-self: flex-start;
+    background-color: white;
+}
+
+.msg_text {
+    padding-right: 30px;
+}
+
 .msg_date {
     color: gray;
     font-style: italic;
     font-size: x-small;
     margin-top: 5px;
-    align-self: flex-end;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
 }
 
 .chat_input {
     height: 90px;
     padding: 20px 25px;
     background-color: #f3eee9;
+    position: relative;
 }
 
 .chat_input .text_input {
@@ -276,7 +293,7 @@ input {
     font-size: 15px;
 }
 
-.chat_input i {
+.chat_input .icon {
     font-size: 27px;
     color: dimgray;
 }
@@ -290,6 +307,8 @@ input {
 }
 
 .send_btn {
+    color: white;
+    font-size: 18px;
     height: 35px;
     width: 35px;
     background-color: #029588;
@@ -298,13 +317,5 @@ input {
     top: 50%;
     transform: translateY(-50%);
     right: 80px;
-}
-
-.send_btn i {
-    color: white;
-}
-
-.send_btn .fas {
-    font-size: 18px;
-    transform: translateX(-1.5px);
+    padding-right: 2.5px;
 }

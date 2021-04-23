@@ -18,98 +18,175 @@
         <div id="root">
 
             <!-- inizio app containter -->
-            <div class="app_container flex align_center">
+            <div class="app_container flex">
 
                 <!-- inizio colonna sinistra -->
                 <div class="left_col">
+
+                    <!-- inizio sezione my user -->
                     <div class="myuser bglightgray flex align_center padding_10_15">
+                        
+                        <!-- immagine my user -->
                         <div class="myuser_img">
                             <img :src="'img/avatar' + myContact.avatar + '.jpg'" alt="" class="circle_img">
                         </div>
+
+                        <!-- nome my user -->
                         <span class="myuser_name">{{myContact.name}}</span>
+                        
+                        <!-- sezione icone my user -->
                         <div class="icons">
                             <span class="icon pointer"><i class="fas fa-circle-notch"></i></span>
                             <span class="icon pointer"><i class="fas fa-comment-alt"></i></span>
                             <span class="icon pointer"><i class="fas fa-ellipsis-v"></i></span>
                         </div>
+
                     </div>
+                    <!-- fine sezione my user -->
+
+                    <!-- inizio sezione notifiche -->
                     <div class="notify flex align_center padding_10_15">
+
+                        <!-- icona notifiche -->
                         <div class="icon flex align_center circle_img">
                             <span class="pointer"><i class="fas fa-bell-slash"></i></span>
                         </div>
+
+                        <!-- testo notifiche -->
                         <div>
                             <div>Ricevi notifiche di nuovi messaggi</div>
                             <div><a class="desktop_notify" href="#">Attiva notifiche desktop</a></div>
                         </div>
+
                     </div>
+                    <!-- fine sezione notifiche -->
+
+                    <!-- inizio sezione contatti -->
                     <div class="contacts">
-                        <div class="text_input contacts_filter bglightgray flex align_center padding_10_15 pos_relative">
+
+                        <!-- inizio filtro contatti -->
+                        <div class="text_input contacts_filter bglightgray flex align_center padding_10_15">
+                            
+                            <!-- icona search -->
+                            <div class="search_icon flex align_center">
+                                <span><i class="fas fa-search"></i></span>
+                            </div>
+                            
+                            <!-- input per filtrare -->
                             <input
                             type="text"
                             class="filter_input"
                             placeholder="Cerca o inizia una nuova chat"
                             v-model="userFilter"
                             @keyup="contactFilter">
-                            <span class="search_icon"><i class="fas fa-search"></i></span>
+                            
                         </div>
+                        <!-- fine filtro contatti -->
+
+                        <!-- inizio lista contatti -->
                         <div class="contacts_cont">
+
+                            <!-- inizio contenitore contatti -->
                             <ul class="contacts_list">
+
+                                <!-- inizio singolo contatto -->
                                 <li v-for="(contact, index) in contacts"
                                 v-if="contact.visible"
                                 @click="changeChat(contact, index)"
                                 class="single_chat pointer flex align_center padding_10_15"
-                                :class="{'toread': contact.toRead}">
+                                :class="{'active': index == currentChat, 'toread': contact.toRead}">
 
+                                    <!-- immagine contatto -->
                                     <div class="chat_user_img">
                                         <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="" class="circle_img">
                                     </div>
+
+                                    <!-- inizio dettagli contatto -->
                                     <div class="contact_details flex">
+
+                                        <!-- nome contatto -->
                                         <div class="chat_contact_name">{{contact.name}}</div>
-                                        <div
-                                        class="chat_last_msg">{{contact.messages[lastMsgIndex(contact)].text}}</div>
+                                        
+                                        <!-- ultimo messaggio contatto -->
+                                        <div class="chat_last_msg">
+                                            <span>{{contact.messages[lastMsgIndex(contact)].text}}</span>
+                                        </div>
+                                    
                                     </div>
+                                    <!-- fine dettagli contatto -->
+
+                                    <!-- cerchietto messaggio non letto con v-if -->
                                     <div v-if="contact.toRead" class="toread_circle">
                                         <i class="fas fa-circle"></i>
                                     </div>
 
                                 </li>
+                                <!-- fine singolo contatto -->
+
                             </ul>
+                            <!-- fine lista contatti -->
+
                         </div>
+                        <!-- fine contenitore contatti -->
+
                     </div>
+                    <!-- fine sezione contatti -->
+
                 </div>
                 <!-- fine colonna sinistra -->
                 
                 <!-- inizio colonna destra -->
                 <div class="right_col">
+
+                    <!-- inizio dettagli contatto chat attiva -->
                     <div class="chat_user bglightgray flex align_center padding_10_15">
+                        
+                        <!-- immagine contatto -->
                         <div class="chat_user_img">
                             <img :src="'img/avatar' + contacts[currentChat].avatar + '.jpg'" alt="" class="circle_img">
                         </div>
+
+                        <!-- nome contatto -->
                         <div class="chat_user_name">
                             <div>{{contacts[currentChat].name}}</div>
-                            <div><span class="last_login">Ultimo accesso oggi alle</span></div>
+                            <div>
+                                <span class="last_login">Ultimo accesso oggi alle</span>
+                            </div>
                         </div>
+
+                        <!-- icone chat attiva -->
                         <div class="icons">
                             <span class="icon pointer"><i class="fas fa-search"></i></i></span>
                             <span class="icon pointer"><i class="fas fa-paperclip"></i></i></span>
                             <span class="icon pointer"><i class="fas fa-ellipsis-v"></i></span>
                         </div>
+
                     </div>
+                    <!-- fine dettagli contatto chat attiva -->
+
+                    <!-- inizio sezione messaggi chat attiva -->
                     <div class="chat_text padding_20_30">
                         <ul class="message_list flex">
                             <li v-for="message in (contacts[currentChat].messages)"
-                            class="single_message flex padding_10_15"
-                            :class="{'sent': message.status == 'sent'}">
+                            class="single_message padding_10_15"
+                            :class="message.status">
                                 <div class="msg_text">{{message.text}}</div>
                                 <div class="msg_date">{{message.date}}</div>
                             </li>
                         </ul>
                     </div>
+                    <!-- fine sezione messaggi chat attiva -->
 
-                    <div class="chat_input flex align_center pos_relative">
-                        <span><i class="far fa-smile"></i></span>
+                    <!-- inizio sezione invia nuovo messaggio -->
+                    <div class="chat_input flex align_center">
+
+                        <!-- icona smile -->
+                        <span class="icon"><i class="far fa-smile"></i></span>
+
+                        <!-- inizio input per scrivere e inviare messaggi -->
                         <div class="text_input">
 
+                            <!-- input per scrivere -->
                             <input
                             type="text"
                             class="message_input"
@@ -117,13 +194,20 @@
                             v-model="newUserMsg"
                             @keyup.enter="sendMsg(currentChat)">
                             
+                            <!-- bottone per inviare messaggi -->
                             <span class="send_btn circle_img pointer flex align_center" @click="sendMsg(currentChat)">
                                 <i class="fas fa-paper-plane"></i>
                             </span>
 
                         </div>
-                        <span><i class="fas fa-microphone"></i></span>
+                        <!-- fine input per scrivere e inviare messaggi -->
+
+                        <!-- icona microfono -->
+                        <span class="icon"><i class="fas fa-microphone"></i></span>
+
                     </div>
+                    <!-- fine sezione invia nuovo messaggio -->
+
                 </div>
                 <!-- fine colonna destra -->
 
