@@ -45,7 +45,7 @@
                     <!-- fine sezione my user -->
 
                     <!-- inizio sezione notifiche -->
-                    <div class="notify flex align_center padding_10_15">
+                    <div v-if="!notify" class="notify flex align_center padding_10_15">
 
                         <!-- icona notifiche -->
                         <div class="icon flex align_center circle_img">
@@ -55,14 +55,19 @@
                         <!-- testo notifiche -->
                         <div>
                             <div>Ricevi notifiche di nuovi messaggi</div>
-                            <div><a class="desktop_notify" href="#">Attiva notifiche desktop</a></div>
+                            <span
+                            class="desktop_notify pointer"
+
+                            @click="notifyOn()">
+                                Attiva notifiche desktop
+                            </span>
                         </div>
 
                     </div>
                     <!-- fine sezione notifiche -->
 
                     <!-- inizio sezione contatti -->
-                    <div class="contacts">
+                    <div class="contacts" :class="{'contacts_grow': notify}">
 
                         <!-- inizio filtro contatti -->
                         <div class="text_input contacts_filter bglightgray flex align_center padding_10_15">
@@ -180,9 +185,20 @@
                         <ul class="message_list flex">
 
                             <!-- inizio singolo messaggio -->
-                            <li v-for="message in (contacts[currentChat].messages)"
+                            <li v-for="(message, index) in (contacts[currentChat].messages)"
                             class="single_message padding_10_15"
                             :class="message.status">
+
+                                <div
+                                class="drop_down"
+                                v-if="message.menuShow">
+                                    <ul class="dropd_list pointer">
+                                        <li
+                                        @click="infoMsg(message)">Info messaggio</li>
+                                        <li
+                                        @click="deleteMsg(index)">Elimina messaggio</li>
+                                    </ul>
+                                </div>
 
                                 <!-- testo messaggio -->
                                 <div class="msg_text">{{message.text}}</div>
@@ -193,7 +209,7 @@
                                 <!-- icona per menu dropdown -->
                                 <div
                                 class="msg_icon_dd pointer"
-                                @click="dropDownShow()">
+                                @click="dropDownShow(message)">
                                     <i class="fas fa-chevron-down"></i>
                                 </div>
 

@@ -87,6 +87,7 @@ input {
 .myuser {
     height: 90px;
     border-right: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
 }
 
 .myuser_img,
@@ -123,12 +124,18 @@ input {
 .desktop_notify {
     font-size: small;
     color: gray;
+    text-decoration: underline;
 }
 
 .contacts {
     height: calc(100% - 180px);
+    flex-grow: 1;
     width: 100%;
     background-color: white;
+}
+
+.contacts_grow {
+    height: calc(100% - 90px);
 }
 
 .contacts_filter {
@@ -205,9 +212,8 @@ input {
 }
 
 .chat_last_login {
-    opacity: 0.4;
+    color: darkgray;
     font-size: x-small;
-    font-style: italic;
     position: absolute;
     top: 15px;
     right: 15px;
@@ -243,7 +249,6 @@ input {
 
 .last_login {
     color: gray;
-    font-style: italic;
     font-size: small;
     margin-top: 5px;
 }
@@ -294,20 +299,37 @@ input {
 }
 
 .msg_icon_dd {
-    color: gray;
+    color: silver;
     position: absolute;
     top: 25%;
-    right: 5%;
+    right: 20px;
     display: none;
-}
-
-.received .msg_icon_dd {
-    top: 25%;
-    right: 10%;
 }
 
 .single_message:hover .msg_icon_dd {
     display: block;
+}
+
+.drop_down {
+    min-width: 150px;
+    position: absolute;
+    top: 70%;
+    right: 0;
+    z-index: 1;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.dropd_list li {
+    color: gray;
+    font-size: small;
+    list-style-type: none;
+    padding: 10px 17px;
+}
+
+.dropd_list li:hover {
+    color: #333;
 }
 
 .chat_input {
