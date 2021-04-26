@@ -57,7 +57,6 @@
                             <div>Ricevi notifiche di nuovi messaggi</div>
                             <span
                             class="desktop_notify pointer"
-
                             @click="notifyOn()">
                                 Attiva notifiche desktop
                             </span>
@@ -113,13 +112,16 @@
                                         <div class="chat_contact_name">{{contact.name}}</div>
                                         
                                         <!-- ultimo messaggio contatto -->
-                                        <div class="chat_last_msg">
+                                        <div class="chat_last_msg" v-if="contact.messages.length > 0">
                                             <span>{{contact.messages[lastMsgIndex(contact)].text}}</span>
                                         </div>
 
                                         <!-- ultimo accesso contatto -->
-                                        <div class="chat_last_login" v-if="!contact.toRead">
+                                        <div class="chat_last_login" v-if="!contact.toRead && contact.messages.length > 0">
                                             <span>{{contact.messages[lastMsgIndex(contact)].date}}</span>
+                                        </div>
+                                        <div class="chat_last_login" v-else>
+                                            <span>{{ dayjs().format("DD/MM/YYYY HH:mm:ss")}}</span>
                                         </div>
                                     
                                     </div>
@@ -163,8 +165,11 @@
                             <div>{{contacts[currentChat].name}}</div>
 
                             <!-- ultimo accesso -->
-                            <div>
+                            <div v-if="contacts[currentChat].messages.length > 0">
                                 <span class="last_login">Ultimo accesso {{contacts[currentChat].messages[lastMsgIndex(contacts[currentChat])].date}}</span>
+                            </div>
+                            <div v-else>
+                                <span class="last_login">Ultimo accesso {{ dayjs().format("DD/MM/YYYY HH:mm:ss")}}</span>
                             </div>
                         </div>
 
@@ -237,10 +242,10 @@
                             class="message_input"
                             placeholder="Scrivi un messaggio"
                             v-model="newUserMsg"
-                            @keyup.enter="sendMsg(currentChat)">
+                            @keyup.enter="sendMsg()">
                             
                             <!-- bottone per inviare messaggi -->
-                            <span class="send_btn circle_img pointer flex align_center" @click="sendMsg(currentChat)">
+                            <span class="send_btn circle_img pointer flex align_center" @click="sendMsg()">
                                 <i class="fas fa-paper-plane"></i>
                             </span>
 

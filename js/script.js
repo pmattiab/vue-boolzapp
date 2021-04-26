@@ -244,12 +244,12 @@ var app = new Vue(
             // funzione per aprire la singola chat
             changeChat(contact, index) {
                 this.currentChat = index;
-                contact.toRead = false;  
+                contact.toRead = false;
             },
 
             // funzione per mandare messaggio utente con riposta "Ok"
-            sendMsg(currentChat) {
-                const arrayMsgs = this.contacts[currentChat].messages;
+            sendMsg() {
+                const arrayMsgs = this.contacts[this.currentChat].messages;
                 if (this.newUserMsg.length > 0) {
                     arrayMsgs.push({
                         date: dayjs().format("DD/MM/YYYY HH:mm:ss"),
